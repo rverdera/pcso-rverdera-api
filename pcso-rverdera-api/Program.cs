@@ -69,6 +69,7 @@ class Todo
     public bool IsComplete { get; set; }
     public string? Message { get; set; }
     public DateTime? Created { get; set; }
+
 }
 
 class TodoDb : DbContext
