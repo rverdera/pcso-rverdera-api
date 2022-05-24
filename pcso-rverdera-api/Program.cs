@@ -60,6 +60,20 @@ app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
     return Results.NotFound();
 });
 
+app.MapDelete("/todoitems", async (TodoDb db) =>
+{
+    if ((db?.Todos?.Count() ?? 0) < 1)
+        return Results.Ok;
+
+    foreach (var todo in db.Todos)
+    {
+        db.Todos.Remove(todo);
+    }
+
+    await db.SaveChangesAsync();
+    return Results.Ok;
+});
+
 app.Run();
 
 class Todo
